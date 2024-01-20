@@ -36,3 +36,7 @@ def insert_inverted_index_to_db(conn, inverted_index_data):
     cursor.executemany("INSERT OR IGNORE INTO inverted_index (term, document_id) VALUES (?, ?)",
                        inverted_index_data)
     conn.commit()
+
+# def get_all_documents(conn):
+#     cursor = conn.cursor()
+#     cursor.execute("SELECT file_path, time_created FROM documents")

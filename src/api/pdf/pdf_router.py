@@ -12,6 +12,13 @@ from ..pdf.pdf_models import PDF
 router = APIRouter()
 
 
+def generate_response_schema(message: str, error_code: int):
+    return {
+        "message": message,
+        "Errorcode": error_code
+    }
+
+
 def process_pdf_logic(pdf_path: Path, conn: sqlite3.Connection):
     try:
         extracted_text = extract_text_from_pdf(pdf_path)
@@ -27,8 +34,8 @@ def process_pdf_logic(pdf_path: Path, conn: sqlite3.Connection):
         raise HTTPException(status_code=500, detail=f"Failed to process PDF: {e}")
 
 
-@router.post("/pdf/process-pdf")
-async def process_pdf(pdf: PDF):
+@router.post("/pdf/process-pdf",tags=["PDF"], description="Process a PDF file")
+async def process_cv(pdf: PDF):
     try:
         data_directory = Path(__file__).parent.parent.parent.parent / 'data'
         database_path = data_directory / 'search_engine.db'
@@ -36,9 +43,13 @@ async def process_pdf(pdf: PDF):
 
         with sqlite3.connect(database_path) as conn:
             process_pdf_logic(pdf_path, conn)
-        return {"message": "PDF processed successfully",
-                "Errorcode": HTTPException(status_code=200)}
+        response_schema = generate_response_schema("PDF processed successfully", 200)
+        return response_schema
 
     except Exception as e:
-        return {"message": f"Failed to process PDF request: {e}",
-                "Errorcode": HTTPException(status_code=500)}
+        error_response_schema = generate_response_schema(f"Failed to process PDF request: {e}", 500)
+        return error_response_schema
+
+    # @router.get("/pdf/get-all", tags=["PDF"], description="get all cv")
+    # async def get_all():
+    #     try:
