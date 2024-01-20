@@ -1,5 +1,5 @@
-import sqlite3
 from pathlib import Path
+import sqlite3
 
 # Get the parent directory of the script (assuming the script is in the 'db' folder)
 script_directory = Path(__file__).parent.parent.resolve()
@@ -18,7 +18,8 @@ cursor.execute('''
     CREATE TABLE IF NOT EXISTS documents (
         document_id INTEGER PRIMARY KEY,
         file_path TEXT UNIQUE NOT NULL,
-        text_content TEXT NOT NULL
+        text_content TEXT NOT NULL,
+        time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
 ''')
 

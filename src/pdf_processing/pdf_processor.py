@@ -1,6 +1,7 @@
 from pathlib import Path
-import fitz
 import re
+
+import fitz
 import spacy
 
 
