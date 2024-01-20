@@ -19,7 +19,7 @@ cursor.execute('''
         document_id INTEGER PRIMARY KEY,
         file_path TEXT UNIQUE NOT NULL,
         text_content TEXT NOT NULL,
-        time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        time_created TIMESTAMP NOT NULL
     )
 ''')
 

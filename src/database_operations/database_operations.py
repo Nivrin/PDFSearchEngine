@@ -1,10 +1,34 @@
+import sqlite3
+
+
 def insert_document_to_db(conn, file_path, text_content):
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO documents (file_path, text_content) VALUES (?, ?)",
+    try:
+        cursor.execute("INSERT INTO documents (file_path, text_content, time_created) VALUES (?, ?, CURRENT_TIMESTAMP)",
                    (file_path, text_content))
-    conn.commit()
+        conn.commit()
+        document_id = cursor.lastrowid
 
-    return cursor.lastrowid
+        return document_id
+
+    except sqlite3.IntegrityError:
+        cursor.execute("UPDATE documents SET text_content = ?, time_created = CURRENT_TIMESTAMP WHERE file_path = ?",
+                       (text_content, file_path))
+
+        conn.commit()
+        cursor.execute("SELECT document_id FROM documents WHERE file_path = ?", (file_path,))
+
+        document_id = cursor.fetchone()[0]
+
+        update_inverted_index_for_document(conn, document_id)
+
+        return document_id
+
+
+def update_inverted_index_for_document(conn, document_id):
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM inverted_index WHERE document_id = ?", (document_id,))
+    conn.commit()
 
 
 def insert_inverted_index_to_db(conn, inverted_index_data):
