@@ -18,3 +18,14 @@ The **PDF Processor API** is a FastAPI-based application for efficiently handlin
 git clone https://github.com/yourusername/pdf-processor-api.git
 cd pdf-processor-api
 pip install -r requirements.txt
+
+### Using Docker
+## Prerequisites
+- Docker installed on your machine.
+
+## Build and Run
+```bash
+git clone https://github.com/yourusername/pdf-processor-api.git
+cd pdf-processor-api
+docker build -t pdf-processor-api .
+docker run -p 80:80 pdf-processor-api
