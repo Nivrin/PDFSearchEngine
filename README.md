@@ -18,6 +18,8 @@ The PDF Processor API is a FastAPI-based application for efficiently handling PD
 git clone https://github.com/yourusername/pdf-processor-api.git
 cd pdf-processor-api
 pip install -r requirements.txt
+python -m spacy download en_core_web_sm
+uvicorn src.main:app --reload
 ```
 ## Using Docker
 
