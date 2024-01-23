@@ -19,6 +19,7 @@ git clone https://github.com/yourusername/pdf-processor-api.git
 cd pdf-processor-api
 pip install -r requirements.txt
 python -m spacy download en_core_web_sm
+python .\src\database_operations\db\create_database.py
 uvicorn src.main:app --reload
 ```
 ## Using Docker
