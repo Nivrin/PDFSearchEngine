@@ -1,6 +1,6 @@
 # PDF Processor API
 
-The **PDF Processor API** is a FastAPI-based application for efficiently handling PDF documents. It offers a range of endpoints to manage PDF files, extract text, and perform diverse processing tasks.
+The PDF Processor API is a FastAPI-based application for efficiently handling PDF documents. It offers a range of endpoints to manage PDF files, extract text, and perform diverse processing tasks.
 
 ## Features
 - 📤 Upload and process PDF documents
@@ -10,8 +10,8 @@ The **PDF Processor API** is a FastAPI-based application for efficiently handlin
 ## Getting Started
 
 ### Prerequisites
-- [Python 3.11.4](https://www.python.org/downloads/release/python-3114/) installed on your machine.
-- [Docker](https://www.docker.com/) (optional, for running with Docker).
+- Python 3.11.4 installed on your machine.
+- Docker (optional, for running with Docker).
 
 ### Installation
 ```bash
@@ -19,11 +19,13 @@ git clone https://github.com/yourusername/pdf-processor-api.git
 cd pdf-processor-api
 pip install -r requirements.txt
 
-### Using Docker
-## Prerequisites
+
+## Using Docker
+
+### Prerequisites
 - Docker installed on your machine.
 
-## Build and Run
+### Build and Run
 ```bash
 git clone https://github.com/yourusername/pdf-processor-api.git
 cd pdf-processor-api
